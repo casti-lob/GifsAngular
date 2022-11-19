@@ -1,6 +1,11 @@
 <h5>Buscar:</h5>
-<input
+<form (ngSubmit)="buscarGifs()">
+
+    <input
     type="text"
     class="form-control"
     placeholder="Buscar gifs..."
->
+    name="query" [(ngModel)]="query">
+
+</form>
+

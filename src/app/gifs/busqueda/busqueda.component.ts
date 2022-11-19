@@ -8,8 +8,17 @@ import { GifsService } from '../services/gifs.service';
 export class BusquedaComponent implements OnInit {
 
   constructor( private bsService:GifsService) { }
-  @Input() new:string="historial por defecto"
+
+  //@Input() new:string="historial por defecto"
+
   ngOnInit(): void {
   }
 
+  query: string = "";
+
+  buscarGifs(){
+    console.log(this.query);
+    this.bsService.buscarGifs(this.query);
+    this.query="";
+  }
 }

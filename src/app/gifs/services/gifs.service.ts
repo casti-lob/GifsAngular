@@ -10,13 +10,21 @@ export class GifsService {
   }
 
   private _history:string []= [
-    "uno"
+    
   ]
   get history():string[]{
     return [...this._history]
   }
 
   buscarGifs(query:string){
-    this._history.unshift(query)
+    if(this._history.indexOf(query)==-1){
+      if(this._history.length<10){
+        this._history.unshift(query)
+      }else{
+        this._history.pop();
+        this._history.unshift(query)
+      }
+    }
+   
   }
 }
