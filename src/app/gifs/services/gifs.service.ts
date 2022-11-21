@@ -17,14 +17,20 @@ export class GifsService {
   }
 
   buscarGifs(query:string){
-    if(this._history.indexOf(query)==-1){
-      if(this._history.length<10){
-        this._history.unshift(query)
-      }else{
-        this._history.pop();
-        this._history.unshift(query)
-      }
+    let clean = query.trim().toLocaleLowerCase();
+    if(clean!=='' && !this._history.includes(clean)){
+      this._history.unshift(query)
+      this._history=this._history.splice(0,10)//solo acepta 10 valores
     }
+
+    // if(this._history.indexOf(query)==-1){
+    //   if(this._history.length<10){
+    //     this._history.unshift(query)
+    //   }else{
+    //     this._history.pop();
+    //     this._history.unshift(query)
+    //   }
+    // }
    
   }
 }
