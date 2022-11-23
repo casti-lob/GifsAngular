@@ -8,7 +8,7 @@ import { Gif, GifsSearchResponse } from '../interfaces/searchResponse.interface'
 export class GifsService {
 
   constructor( private http: HttpClient) { 
-
+    this._history = JSON.parse(localStorage.getItem('history')!)|| [];
   }
 
   private _history:string []= [
@@ -26,6 +26,8 @@ export class GifsService {
     if(clean!=='' && !this._history.includes(clean)){
       this._history.unshift(query)
       this._history=this._history.splice(0,10)//solo acepta 10 valores
+      
+      localStorage.setItem('history', JSON.stringify(this._history))
     }
 
     // if(this._history.indexOf(query)==-1){
@@ -40,7 +42,10 @@ export class GifsService {
     const params = new HttpParams()
     .set('api_key',this.api_key)
     .set('q',query)
+    .set('limit',10)//solo saca 10 gifs
 
+    //Ojo devuelve un nuevo objeto, no establece un parametro nuevo
+    //params.set('atributo3', 3)
     this.http.get<GifsSearchResponse>(this.url, {params})
     .subscribe((resp)=>this.results= resp.data
     )

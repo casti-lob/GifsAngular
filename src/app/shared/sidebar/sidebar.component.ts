@@ -15,4 +15,7 @@ export class SidebarComponent implements OnInit {
   get history(): string[]{
     return this.bsService.history;
   }
+  getGifs(query:string) {
+    this.bsService.buscarGifs(query);
+  }
 }

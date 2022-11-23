@@ -6,7 +6,7 @@
 
     <div class="list-group list-reset">
         <a class="list-group-item list-group-item-action" *ngFor="let index of history">
-           {{index}}
+           <button (click)="getGifs(index)">{{index}}</button>
         </a>
     </div>
 </div>
